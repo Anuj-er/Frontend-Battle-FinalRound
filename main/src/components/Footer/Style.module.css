@@ -1,0 +1,196 @@
+.loopFoot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    background-image: url(https://assets-global.website-files.com/659dbdfd5a080be8d3483164/659dbdfd5a080be8d348317c_ScrollUp.svg);
+    background-size: cover; /* Adjust this as needed */
+    background-position: center; 
+    animation: rotateAnimation 15s linear infinite;
+    z-index: 1;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+@keyframes rotateAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.masker {
+    position: relative;
+    overflow: hidden;
+}
+
+.spanMask {
+    transform: translateY(0);
+    transition: all 0.5s ease;
+}
+
+.masker:hover .spanMask {
+    transform: translateY(-100%);
+}
+
+.masker::after {
+    content: "LET'S GO";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    font-family: 'Sansita';
+    font-size: 2.1vh;
+    font-weight: 600;
+    transition: all 0.5s ease;
+}
+
+.masker:hover::after {
+    top: 0;
+}
+
+.iconMask {
+    transform: translateY(0) rotate(0deg);
+    transition: all 0.5s ease;
+}
+
+.masker:hover .iconMask {
+    transform: translateY(-100%) rotate(45deg);
+}
+
+.loginLink {
+    position: relative;
+    display: inline-block;
+}
+
+.loginLink::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    transition: width 0.3s ease;
+}
+
+.loginLink:hover::before {
+    width: 100%;
+}
+
+.loginLink::after {
+    content: '→';
+    position: absolute;
+    right: -20px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.loginLink:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.verifyLink {
+    position: relative;
+    display: inline-block;
+}
+
+.verifyLink::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #a855f7, #d8b4fe);
+    transition: width 0.3s ease;
+}
+
+.verifyLink:hover::before {
+    width: 100%;
+}
+
+.verifyLink::after {
+    content: '→';
+    position: absolute;
+    right: -20px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.verifyLink:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.coursesLink {
+    position: relative;
+    display: inline-block;
+}
+
+.coursesLink::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #22c55e, #4ade80);
+    transition: width 0.3s ease;
+}
+
+.coursesLink:hover::before {
+    width: 100%;
+}
+
+.coursesLink::after {
+    content: '→';
+    position: absolute;
+    right: -20px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.coursesLink:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.masker:hover .iconMask {
+    transform: rotate(45deg);
+    transition: transform 0.5s  ease-in-out;
+  }
+  
+ 
+  .masker:hover .spanMask {
+    transition: transform 0.5s  ease-in-out; 
+    animation: slideAndFade 0.4s forwards;
+  }
+ 
+ 
+ 
+  @keyframes slideAndFade {
+    0% {
+       transform: translateY(0);
+       opacity: 1;
+     }
+     50% {
+       transform: translateY(-100%);
+       opacity: 0;
+     }
+     51% {
+       transform: translateY(100%);
+       opacity: 0;
+     }
+     100% {
+       transform: translateY(0);
+       opacity: 1;
+     }
+  }

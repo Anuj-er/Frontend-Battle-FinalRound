@@ -1,0 +1,760 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.coursesContainer {
+  width: 100%;
+  min-height: 100vh;
+  padding: 5rem 2rem;
+  background-color: #f8fafc;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Custom cursor */
+.customCursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(59, 130, 246, 0.5);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, background-color 0.3s, transform 0.3s;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+/* Particles */
+.particlesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+  pointer-events: none;
+}
+
+/* 3D Grid Background */
+.grid3d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: perspective(1000px) rotateX(60deg) scale(2.5);
+  transform-origin: center center;
+  opacity: 0.2;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.backButton {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #1e293b;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background-color: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.backIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.backButton:hover .backIcon {
+  transform: translateX(-3px);
+}
+
+.mainContent {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.headerSection {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.headerSection h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;
+}
+
+.headerSection h1 span {
+  display: inline-block;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.headerSection h1:hover span {
+  animation: wave 0.3s ease forwards;
+  animation-delay: calc(0.05s * var(--i));
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.headerSection p {
+  font-size: 1.125rem;
+  color: #64748b;
+  max-width: 48rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* New blur effect styles */
+.blurLayer {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.2) 0%,
+    rgba(147, 51, 234, 0.2) 100%
+  );
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.7;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.headingWrapper {
+  position: relative;
+  display: inline-block;
+  padding: 1rem 2rem;
+  overflow: hidden;
+}
+
+.headingGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.3) 0%,
+    rgba(147, 51, 234, 0.1) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  filter: blur(20px);
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Course cards */
+.coursesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+  perspective: 1000px;
+}
+
+.courseCard {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.courseCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  background-color: var(--card-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.courseCard:hover::before {
+  transform: scaleX(1);
+}
+
+.courseCard:hover {
+  transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.courseCard h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 1rem 0 0.5rem;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.courseCard:hover h3 {
+  color: var(--card-color);
+}
+
+.courseIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.5s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.courseIcon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 20px var(--card-color);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.courseCard:hover .courseIcon::after {
+  opacity: 0.7;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.starIcon {
+  width: 1rem;
+  height: 1rem;
+  fill: #f59e0b;
+  margin-right: 0.25rem;
+  filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.5));
+}
+
+.courseCard p {
+  color: #64748b;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.duration {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.learnMoreButton {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  background-color: var(--card-color-transparent);
+  color: var(--card-color);
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.learnMoreButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.6s ease;
+  z-index: 0;
+}
+
+.learnMoreButton:hover::before {
+  left: 100%;
+}
+
+.learnMoreButton:hover {
+  background-color: var(--card-color);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Card glow effect */
+.cardGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(20px);
+  background: var(--card-color);
+  transition: opacity 0.5s ease;
+}
+
+.courseCard:hover .cardGlow {
+  opacity: 0.15;
+}
+
+/* Card highlight effect */
+.cardHighlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  z-index: -1;
+  box-shadow: 0 0 0 2px var(--card-color);
+  opacity: 0;
+  animation: pulseHighlight 2s ease-in-out infinite;
+}
+
+@keyframes pulseHighlight {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+.activeCard .cardHighlight {
+  opacity: 0.3;
+}
+
+.ctaSection {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.ctaWrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.ctaWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 10px;
+  background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.3), transparent 70%);
+  border-radius: 50%;
+  filter: blur(5px);
+}
+
+.applyButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(to right, #3b82f6, #6366f1);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.applyButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: all 0.6s ease;
+  z-index: 0;
+}
+
+.applyButton:hover::before {
+  left: 100%;
+}
+
+.applyButton:hover {
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+}
+
+.arrowIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.applyButton:hover .arrowIcon {
+  transform: translateX(3px);
+}
+
+.infoSection {
+  margin-top: 6rem;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.infoColumns {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .infoColumns {
+    flex-direction: row;
+  }
+  
+  .infoColumn {
+    width: 50%;
+  }
+}
+
+.infoColumn h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.infoColumn h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(to right, #3b82f6, transparent);
+  border-radius: 3px;
+}
+
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.benefitsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.benefitsList li:hover {
+  transform: translateX(5px);
+}
+
+.checkIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #10b981;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.3));
+}
+
+.benefitsList li span {
+  color: #475569;
+  font-size: 1rem;
+}
+
+.processList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.processStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.processStep::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 2rem;
+  bottom: -1.25rem;
+  width: 2px;
+  background: linear-gradient(to bottom, #3b82f6, transparent);
+  opacity: 0.3;
+}
+
+.processStep:last-child::after {
+  display: none;
+}
+
+.processNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 9999px;
+  font-weight: 600;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.processStep:hover .processNumber {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.2);
+}
+
+.processStep h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.processStep p {
+  font-size: 0.9375rem;
+  color: #64748b;
+}
+
+.applySection {
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+}
+
+.applySection h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.applyCard {
+  background: linear-gradient(to right, #3b82f6, #6366f1);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  text-align: center;
+  color: white;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.applyCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  opacity: 0;
+  animation: pulse 5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+.applyCard h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.applyCard p {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.applyNowButton {
+  background-color: white;
+  color: #3b82f6;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.applyNowButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.2),
+    transparent
+  );
+  transition: all 0.6s ease;
+  z-index: -1;
+}
+
+.applyNowButton:hover::before {
+  left: 100%;
+}
+
+.applyNowButton:hover {
+  background-color: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .coursesContainer {
+    padding: 5rem 1rem 2rem;
+  }
+  
+  .headerSection h1 {
+    font-size: 2.25rem;
+  }
+  
+  .coursesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .applyCard {
+    padding: 1.5rem;
+  }
+  
+  .customCursor {
+    display: none;
+  }
+} 

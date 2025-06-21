@@ -1,0 +1,188 @@
+.loginPage {
+  background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.particlesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+  pointer-events: none;
+}
+
+.grid3d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: perspective(1000px) rotateX(60deg) scale(2.5);
+  transform-origin: center center;
+  opacity: 0.2;
+  z-index: 1;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 40px;
+  }
+}
+
+.heroImageContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.heroImageContainer img {
+  transition: transform 0.5s ease;
+}
+
+.heroImageContainer:hover img {
+  transform: scale(1.05);
+}
+
+.heroImageGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.7;
+  filter: blur(20px);
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.4), transparent 70%);
+  animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+.cardGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(20px);
+  background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.4), transparent 70%);
+  animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.inputWrapper:focus-within .inputGlow {
+  opacity: 1;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.loginButton {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.loginButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.6s ease;
+  z-index: 0;
+}
+
+.loginButton:hover::before {
+  left: 100%;
+}
+
+.loginButton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.8) 0%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.loginButton:hover::after {
+  opacity: 0.4;
+}
+
+.backButton {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.backButton:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+  transform: translateX(-5px);
+}
+
+.backButton svg {
+  transition: transform 0.3s ease;
+}
+
+.backButton:hover svg {
+  transform: translateX(-3px);
+} 

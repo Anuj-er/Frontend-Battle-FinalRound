@@ -1,0 +1,91 @@
+.scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.scrollTopBtn:hover {
+  background: rgba(37, 99, 235, 1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+.scrollTopBtn svg {
+  transition: transform 0.3s ease;
+}
+
+.scrollTopBtn:hover svg {
+  transform: translateY(-3px);
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent;
+}
+
+.scrollTopBtn:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: -35px;
+}
+
+/* Animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.scrollTopBtn:active {
+  animation: bounce 0.5s ease;
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+  .scrollTopBtn {
+    bottom: 90px; /* Adjust to avoid overlap with WhatsApp button */
+    width: 40px;
+    height: 40px;
+  }
+} 

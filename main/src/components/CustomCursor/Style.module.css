@@ -1,0 +1,92 @@
+/* Hide the default cursor */
+:global(body) {
+  cursor: none !important;
+}
+
+:global(a), 
+:global(button),
+:global([role="button"]),
+:global(.course-card),
+:global(.login-card) {
+  cursor: none !important;
+}
+
+/* Main cursor outer ring */
+.cursor {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(59, 130, 246, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: width 0.3s, height 0.3s, border-color 0.3s, opacity 0.3s;
+  mix-blend-mode: difference;
+}
+
+/* Inner cursor dot */
+.cursorDot {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(59, 130, 246, 0.8);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  transition: width 0.2s, height 0.2s, background-color 0.3s, opacity 0.3s, transform 0.1s;
+}
+
+/* Cursor states */
+.hidden {
+  opacity: 0;
+}
+
+/* Click animation */
+.clicked {
+  width: 36px;
+  height: 36px;
+  border-color: rgba(168, 85, 247, 0.8);
+  opacity: 0.8;
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+}
+
+.dotClicked {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(168, 85, 247, 0.8);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Link hover animation */
+.linkHovered {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(59, 130, 246, 0.3);
+  background-color: rgba(59, 130, 246, 0.1);
+  mix-blend-mode: normal;
+}
+
+.dotLinkHovered {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+}
+
+/* Media query to disable custom cursor on touch devices */
+@media (max-width: 768px) {
+  .cursor, .cursorDot {
+    display: none;
+  }
+  
+  :global(body),
+  :global(a),
+  :global(button),
+  :global([role="button"]),
+  :global(.course-card),
+  :global(.login-card) {
+    cursor: auto !important;
+  }
+} 
